@@ -14,7 +14,9 @@ application/logs/*
 composer.lock
 
 user_guide
+nbproject
 /vendor/
+uploads
 
 # IDE Files
 #-------------------------
