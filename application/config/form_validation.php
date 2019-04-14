@@ -30,6 +30,18 @@ $config = array(
             'rules' => 'required|trim|matches[new_password]'
         )
     ),
+    'admin_edit_profile' => array(
+        array(
+            'field' => 'name',
+            'label' => 'Name',
+            'rules' => 'required|trim|min_length[2]|max_length[200]'
+        ),
+         array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|trim|valid_email'
+        )
+    ),
     'vendor_edit_profile' => array(
         array(
             'field' => 'name',
