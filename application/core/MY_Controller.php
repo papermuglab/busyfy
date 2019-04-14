@@ -12,12 +12,12 @@ class MY_Controller extends CI_Controller {
     public function displayAdmin($common, $data = array(), $return = FALSE) {
         if ($return):
             $this->load->view('common/header');
-            $this->load->view('common/navigation');
+            $this->load->view('common/admin-navigation');
             $this->load->view('admin/' . $common, $data);
             $this->load->view('common/footer');
         else:
             $this->load->view('common/header');
-            $this->load->view('common/navigation');
+            $this->load->view('common/admin-navigation');
             $this->load->view('admin/' . $common);
             $this->load->view('common/footer');
         endif;
