@@ -83,3 +83,13 @@ defined('EXIT_USER_INPUT')     OR define('EXIT_USER_INPUT', 7); // invalid user 
 defined('EXIT_DATABASE')       OR define('EXIT_DATABASE', 8); // database error
 defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+// Project details
+defined("PROJECT_NAME") OR define("PROJECT_NAME", "Vendor Management");
+
+// Database details
+defined("TBL_ADMINS") OR define("TBL_ADMINS", "admins");
+defined("TBL_VENDORS") OR define("TBL_VENDORS", "vendors");
+defined("TBL_VENDOR_BANKS") OR define("TBL_VENDOR_BANKS", "vendor_bank_details");
+
+// File details
