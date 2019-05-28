@@ -85,11 +85,30 @@ defined('EXIT__AUTO_MIN')      OR define('EXIT__AUTO_MIN', 9); // lowest automat
 defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
 
 // Project details
-defined("PROJECT_NAME") OR define("PROJECT_NAME", "Vendor Management");
+defined("PROJECT_NAME") OR define("PROJECT_NAME", "Busyfy");
 
 // Database details
 defined("TBL_ADMINS") OR define("TBL_ADMINS", "admins");
+defined("TBL_VENDORS") OR define("TBL_ADMIN_LOGIN_LOGS", "admin_login_logs");
+defined("TBL_VENDOR_BANKS") OR define("TBL_LEADS", "leads");
+defined("TBL_PATRONS") OR define("TBL_PATRONS", "patrons");
+defined("TBL_PAYMENT_HISTORY") OR define("TBL_PAYMENT_HISTORY", "payment_history");
+defined("TBL_PRODUCTS") OR define("TBL_PRODUCTS", "products");
+defined("TBL_ROLES") OR define("TBL_ROLES", "roles");
+defined("TBL_STAFF") OR define("TBL_STAFF", "staff");
+defined("TBL_STAFF_TASKS") OR define("TBL_STAFF_TASKS", "staff_tasks");
+defined("TBL_STAFF_TASK_LOCATION") OR define("TBL_STAFF_TASK_LOCATION", "staff_task_location");
 defined("TBL_VENDORS") OR define("TBL_VENDORS", "vendors");
-defined("TBL_VENDOR_BANKS") OR define("TBL_VENDOR_BANKS", "vendor_bank_details");
+defined("TBL_VENDOR_BANK_DETAILS") OR define("TBL_VENDOR_BANK_DETAILS", "vendor_bank_details");
+defined("TBL_VENDOR_COMPANY_DETAILS") OR define("TBL_VENDOR_COMPANY_DETAILS", "vendor_company_details");
+defined("TBL_VENDOR_LOGIN_LOGS") OR define("TBL_VENDOR_LOGIN_LOGS", "vendor_login_logs");
 
 // File details
+
+
+// Static Variable
+defined("INACTIVE") OR define("INACTIVE", "0");
+defined("ACTIVE") OR define("ACTIVE", "1");
+defined("DELETED") OR define("DELETED", "1");
+defined("NOT_DELETED") OR define("NOT_DELETED", "0");
+defined("SELF_REGISTRATION") OR define("SELF_REGISTRATION", "0");

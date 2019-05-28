@@ -26,6 +26,7 @@ class Profile extends MY_Controller {
             $adminParaArr['email'] = $this->input->post('email');
             $this->dml->update(TBL_ADMINS, 'admin_id', $adminId, $adminParaArr);
 
+            $this->session->set_userdata('admin_name', $adminParaArr['name']);
             // Prepare Message
             $this->session->set_flashdata('message', getDesignedMessage("Profile updated successfully."));
             redirect(base_url('admin/profile'));

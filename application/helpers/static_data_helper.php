@@ -36,3 +36,26 @@ function getAccountType($id) {
     }
     return $name;
 }
+
+function getAccountStatus() {
+    return array('0' => 'In Process', '1' => 'Active', '2' => 'Need to Resolve comments', '3' => 'Discarded');
+}
+
+function getAccountStatusName($id) {
+    $name = '';
+    switch ($id) {
+        case 0:
+            $name = 'In Process';
+            break;
+        case 1:
+            $name = 'Active';
+            break;
+        case 2:
+            $name = 'Need to Resolve comments';
+            break;
+        case 3:
+            $name = 'Discarded';
+            break;
+    }
+    return $name;
+}

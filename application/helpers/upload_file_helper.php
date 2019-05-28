@@ -34,11 +34,11 @@ function uploadProfile($product_id, $files) {
     return true;
 }
 
-function uploadFile($filename) {
+function uploadFile($filename, $filePath) {
     $CI = & get_instance();
     $rand = mt_rand(10, 99);
     $config = array(
-        'upload_path' => 'uploads/vendor/',
+        'upload_path' => 'uploads/' . $filePath,
         'allowed_types' => 'jpg|png|jpeg|pdf',
         'overwrite' => 1,
         'file_name' => date('YmdHis') . $rand
