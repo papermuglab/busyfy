@@ -35,6 +35,7 @@ class Login extends MY_Controller {
 
     function setSession($para) {
         $this->session->set_userdata('admin_id', $para['admin_id']);
+        $this->session->set_userdata('admin_role', $para['role_id']);
         $this->session->set_userdata('admin_name', $para['name']);
     }
 

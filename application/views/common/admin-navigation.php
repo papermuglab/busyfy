@@ -29,11 +29,40 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Vendor</span>
+                </a>
+                <div id="collapseOne" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Vendor management:</h6>
+                        <a class="collapse-item" href="<?php echo base_url('admin/vendor'); ?>">List</a>
+                        <?php if ($this->session->userdata('admin_role') == '1'): ?>
+                            <a class="collapse-item" href="<?php echo base_url('admin/vendor/add'); ?>">Add</a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            </li>
+            <?php if ($this->session->userdata('admin_role') == '1'): ?>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Staff</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Staff management:</h6>
+                        <a class="collapse-item" href="<?php echo base_url('admin/staff'); ?>">List</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/staff/add'); ?>">Add</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Product</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Product management:</h6>
                         <a class="collapse-item" href="<?php echo base_url('admin/product'); ?>">List</a>
@@ -41,19 +70,29 @@
                     </div>
                 </div>
             </li>
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Staff</span>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Task</span>
                 </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                <div id="collapseFour" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Staff management:</h6>
-                        <a class="collapse-item" href="<?php echo base_url('admin/staff'); ?>">List</a>
-                        <a class="collapse-item" href="<?php echo base_url('admin/staff/add'); ?>">Add</a>
+                        <h6 class="collapse-header">Task management:</h6>
+                        <a class="collapse-item" href="<?php echo base_url('admin/task'); ?>">List</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/task/add'); ?>">Add</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Lead</span>
+                </a>
+                <div id="collapseFive" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Lead management:</h6>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lead'); ?>">List</a>
+                        <a class="collapse-item" href="<?php echo base_url('admin/lead/add'); ?>">Add</a>
                     </div>
                 </div>
             </li>
@@ -65,9 +104,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Reports</span></a>
             </li>
-
-            <hr class="sidebar-divider d-none d-md-block">
-
+            <?php endif; ?>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>

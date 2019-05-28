@@ -35,10 +35,10 @@
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="p-5">
-                                        <?php echo $this->session->flashdata('message'); ?>
                                         <div class="text-center">
                                             <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                         </div>
+                                        <?php echo $this->session->flashdata('message'); ?>
                                         <form class="user" method="POST" action="<?php echo base_url('admin/login/authenticate'); ?>">
                                             <div class="form-group">
                                                 <input type="email" name="email" class="form-control form-control-user" id="exampleInputEmail" aria-describedby="emailHelp" placeholder="Enter Email Address...">
