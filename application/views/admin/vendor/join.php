@@ -6,8 +6,8 @@
         <h1 class="h3 mb-2 text-gray-800">Vendor Management - <?php echo isset($vendor) ? 'Edit' : 'Add'; ?></h1>
     </div>
     <?php echo $this->session->flashdata('message'); ?>
-    <form id="editProfile" action="<?php echo base_url('admin/vendor/save'); ?>" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="vendor_id" id="vendor_id" value="<?php if(isset($vendor)){ echo $vendor['vendor_id']; } ?>">
+    <form id="joinVendor" action="<?php echo base_url('admin/vendor/insert'); ?>" method="POST" enctype="multipart/form-data">
+        <input type="hidden" name="vendor_id" id="vendor_id" value="<?php echo isset($vendor) ? $vendor['vendor_id'] : '0'; ?>">
         <div class="row">
             <div class="col-md-6">
                 <div class="card shadow mb-4">
@@ -73,7 +73,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Accordion -->
                     <a href="#caFeedback" class="d-block card-header py-3" data-toggle="collapse" role="button" aria-expanded="true" aria-controls="caFeedback">
-                        <h6 class="m-0 font-weight-bold text-primary">CA Feedback</h6>
+                        <h6 class="m-0 font-weight-bold text-primary">Admin Feedback</h6>
                     </a>
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="caFeedback">
@@ -129,13 +129,18 @@
                                 <?php echo form_error('gst_no'); ?>
                             </div>
                             <div class="form-group">
+                                <label>Upload GST Document</label>
+                                <input type="file" class="form-control" name="gst_doc" id="gst_doc">
+                                <?php echo form_error('gst_doc'); ?>
+                            </div>
+                            <div class="form-group">
                                 <label>GST No Verified?</label>
                                 <div class="form-check form-check-inline">
                                     <input name="gst_verified" class="form-check-input" type="radio" value="1" <?php if(isset($company)){ if($company['gst_verified'] == 1){ echo 'checked'; } } ?>>
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="gst_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['gst_verified'] == 0){ echo 'checked'; } } ?>>
+                                    <input name="gst_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['gst_verified'] == 0){ echo 'checked'; }elseif(isset($company) && $company['gst_verified'] != 1){ echo 'checked'; } } ?>>
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
@@ -153,6 +158,11 @@
                                 <label>PAN No</label>
                                 <input type="text" class="form-control" placeholder="Enter Pan No" name="pan_no" id="pan_no" value="<?php if(set_value('pan_no')){ echo set_value('pan_no'); }elseif(isset($company['pan_no'])){ echo $company['pan_no']; } ?>">
                                 <?php echo form_error('pan_no'); ?>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload PAN Document</label>
+                                <input type="file" class="form-control" name="pan_doc" id="pan_doc">
+                                <?php echo form_error('pan_doc'); ?>
                             </div>
                             <div class="form-group">
                                 <label>PAN No Verified?</label>
@@ -181,6 +191,11 @@
                                 <?php echo form_error('tin_no'); ?>
                             </div>
                             <div class="form-group">
+                                <label>Upload TIN Document</label>
+                                <input type="file" class="form-control" name="tin_doc" id="tin_doc">
+                                <?php echo form_error('tin_doc'); ?>
+                            </div>
+                            <div class="form-group">
                                 <label>TIN No Verified?</label>
                                 <div class="form-check form-check-inline">
                                     <input name="tin_verified" class="form-check-input" type="radio" value="1" <?php if(isset($company)){ if($company['tin_verified'] == 1){ echo 'checked'; } } ?>>
@@ -205,6 +220,11 @@
                                 <label>Service tax ID</label>
                                 <input type="text" class="form-control" placeholder="Enter Service tax ID" name="service_tax_id" id="service_tax_id" value="<?php if(set_value('service_tax_id')){ echo set_value('service_tax_id'); }elseif(isset($company['service_tax_id'])){ echo $company['service_tax_id']; } ?>">
                                 <?php echo form_error('service_tax_id'); ?>
+                            </div>
+                            <div class="form-group">
+                                <label>Upload Service tax Document</label>
+                                <input type="file" class="form-control" name="service_tax_doc" id="service_tax_doc">
+                                <?php echo form_error('service_tax_doc'); ?>
                             </div>
                             <div class="form-group">
                                 <label>Service tax ID Verified?</label>

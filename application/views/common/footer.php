@@ -57,15 +57,16 @@
 <script src="<?php echo base_url('assets/admin/'); ?>js/validation-forms.js"></script>
 <script>
     $('#filter_button').on('click', function () {
-        var keyWord = encodeURI($('#key_word').val());
+        var keyWord = $('#key_word').val() != '' ? encodeURI($('#key_word').val()) : 0;
         var status = encodeURI($('#status').val());
-        if (status == '') {
-            status = 0;
-        }
         var offset = $('#offset').val();
         var url = $('#url').val();
         window.location.href = url + keyWord + '/' + status + '/' + offset;
     });
+    function showDocument(documentURL) {
+        $('#uploadedDocument').attr('src', documentURL);
+        $('#viewDoc').modal('show');
+    }
 </script>
 </body>
 
