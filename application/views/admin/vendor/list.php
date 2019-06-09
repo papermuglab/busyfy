@@ -1,6 +1,6 @@
 <!-- Begin Page Content -->
 <div class="container-fluid">
-
+<?php $method = $this->session->userdata('admin_role') == '1' ? 'correct' : 'edit'; ?>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Vendor List</h1>
     <?php echo $this->session->flashdata('message'); ?>
@@ -23,9 +23,9 @@
                         <div class="col-md-5">
                             <?php $statusTypes = getAccountStatus(); ?>
                             <select class="form-control" name="status" id="status" >
-                                <option value="">All</option>
+                                <option value="all">All</option>
                                 <?php foreach ($statusTypes AS $key => $value): ?>
-                                    <option value="<?php echo $key; ?>" <?php if($status != ''){ if($key == $status){ echo 'selected'; } } ?>><?php echo $value; ?></option>
+                                    <option value="<?php echo $key; ?>" <?php if($status != 'all' && $status != ''){ if($key == $status){ echo 'selected'; } } ?>><?php echo $value; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
@@ -61,7 +61,7 @@
                                 <td><?php echo $vendor['mobile']; ?></td>
                                 <td><?php echo getAccountStatusName($vendor['status']); ?></td>
                                 <td>
-                                    <a href="<?php echo base_url('admin/vendor/edit/' . base64_encode($vendor['vendor_id'])); ?>" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-eye"></i></a>
+                                    <a href="<?php echo base_url('admin/vendor/'.$method.'/' . encrypt($vendor['vendor_id'])); ?>" class="btn btn-primary btn-circle btn-sm"><i class="fas fa-eye"></i></a>
                                     <a href="#" onclick="deleteRecord('vendor', <?php echo $vendor['vendor_id']; ?>)" class="btn btn-danger btn-circle btn-sm"><i class="fas fa-trash"></i></a>
                                 </td>
                             </tr>

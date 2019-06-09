@@ -11,8 +11,8 @@ class Vendor_model extends CI_Model {
         if (!empty($keyWord)) {
             $this->db->where('(owner_name LIKE "%' . $keyWord . '%" OR email LIKE "%' . $keyWord . '%" OR mobile LIKE "%' . $keyWord . '%")');
         }
-        if ($status != '') {
-            $this->db->where('status', $status);
+        if ($status != 'all') {
+            $this->db->like('status', $status);
         }
         $this->db->order_by('status', 'ASC');
         $this->db->limit(Model::ADMIN_PAGE_LIMIT, $offset);
@@ -26,10 +26,19 @@ class Vendor_model extends CI_Model {
         if (!empty($keyWord)) {
             $this->db->where('(owner_name LIKE "%' . $keyWord . '%" OR email LIKE "%' . $keyWord . '%" OR mobile LIKE "%' . $keyWord . '%")');
         }
-        if ($status != '') {
-            $this->db->where('status', $status);
+        if ($status != 'all') {
+            $this->db->like('status', $status);
         }
         return $this->db->get()->row()->total;
+    }
+
+    public function isAvailable($table, $vendorID) {
+        $this->db->select('vendor_id');
+        $this->db->from($table);
+        $this->db->where('vendor_id', $vendorID);
+        $this->db->limit(1);
+        $row = $this->db->get()->row();
+        return !empty($row) ? true : false;
     }
 
 }

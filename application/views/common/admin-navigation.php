@@ -38,7 +38,7 @@
                         <h6 class="collapse-header">Vendor management:</h6>
                         <a class="collapse-item" href="<?php echo base_url('admin/vendor'); ?>">List</a>
                         <?php if ($this->session->userdata('admin_role') == '1'): ?>
-                            <a class="collapse-item" href="<?php echo base_url('admin/vendor/add'); ?>">Add</a>
+                            <a class="collapse-item" href="<?php echo base_url('admin/vendor/join'); ?>">Add</a>
                         <?php endif; ?>
                     </div>
                 </div>

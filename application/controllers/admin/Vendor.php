@@ -5,7 +5,7 @@ class Vendor extends MY_Controller {
     public function __construct() {
         parent::__construct();
         $this->load->library(array('form_validation', 'dml', 'pagination'));
-        $this->load->helper(array('check_admin_session', 'get_designed_message', 'static_data'));
+        $this->load->helper(array('check_admin_session', 'get_designed_message', 'static_data', 'encrypt_uri'));
         $this->load->model('admin/vendor_model', 'model');
         isLoggedIn();
     }
@@ -14,7 +14,7 @@ class Vendor extends MY_Controller {
         $this->load->config('pagination');
         $config = $this->config->item('pagination');
         $keyWord = (empty($this->uri->segment(4))) ? 0 : urldecode($this->uri->segment(4));
-        $status = (empty($this->uri->segment(5))) ? '' : urldecode($this->uri->segment(5));
+        $status = $this->uri->segment(5) != '' ? urldecode($this->uri->segment(5)) : '';
         $offset = (empty($this->uri->segment(6))) ? 0 : $this->uri->segment(6);
         $config["uri_segment"] = 6;
         $config["base_url"] = base_url('admin/vendor/index/' . urlencode($keyWord) . '/' . urlencode($status));
@@ -27,8 +27,20 @@ class Vendor extends MY_Controller {
         $this->displayAdmin('vendor/list', $data, true);
     }
 
+    public function join() {
+        $this->displayAdmin('vendor/join');
+    }
+
+    public function correct($vendorEncryptID) {
+        $vendorID = dycrypt($vendorEncryptID);
+        $data['vendor'] = $this->dml->getRow(TBL_VENDORS, 'vendor_id', $vendorID);
+        $data['bank'] = $this->dml->getRow(TBL_VENDOR_BANK_DETAILS, 'vendor_id', $vendorID);
+        $data['company'] = $this->dml->getRow(TBL_VENDOR_COMPANY_DETAILS, 'vendor_id', $vendorID);
+        $this->displayAdmin('vendor/join', $data, true);
+    }
+
     public function edit($vendorEncryptID) {
-        $vendorID = base64_decode($vendorEncryptID);
+        $vendorID = dycrypt($vendorEncryptID);
         $data['vendor'] = $this->dml->getRow(TBL_VENDORS, 'vendor_id', $vendorID);
         $data['bank'] = $this->dml->getRow(TBL_VENDOR_BANK_DETAILS, 'vendor_id', $vendorID);
         $data['company'] = $this->dml->getRow(TBL_VENDOR_COMPANY_DETAILS, 'vendor_id', $vendorID);
@@ -54,7 +66,12 @@ class Vendor extends MY_Controller {
         $vendor['domain_type'] = $this->input->post('domain_type');
         $vendor['billing_address'] = $this->input->post('billing_address');
         $vendor['status'] = $this->input->post('status');
-        $result = $this->dml->update(TBL_VENDORS, 'vendor_id', $vendorID, $vendor);
+        if (empty($vendorID) && $this->model->isAvailable(TBL_VENDORS, $vendorID) === false) { // Insert
+            $result = $this->dml->insert(TBL_VENDORS, $vendor);
+        } else { // Update
+            $result = $this->dml->update(TBL_VENDORS, 'vendor_id', $vendorID, $vendor);
+        }
+        return $result;
     }
 
     public function saveBankDetails($vendorID) {
@@ -62,13 +79,16 @@ class Vendor extends MY_Controller {
         $bank['account_type'] = $this->input->post('account_type');
         $bank['account_no'] = $this->input->post('account_no');
         $bank['ifsc_code'] = $this->input->post('ifsc_code');
-        $this->dml->update(TBL_VENDOR_BANK_DETAILS, 'vendor_id', $vendorID, $bank);
+        if (!empty($vendorID) && $this->model->isAvailable(TBL_VENDOR_BANK_DETAILS, $vendorID) === false) { // Insert
+            $bank['vendor_id'] = $vendorID;
+            $this->dml->insert(TBL_VENDOR_BANK_DETAILS, $bank);
+        } else { // Update
+            $this->dml->update(TBL_VENDOR_BANK_DETAILS, 'vendor_id', $vendorID, $bank);
+        }
     }
 
     public function saveCompanyDetails($vendorID) {
         $this->load->helper('upload_file');
-        $companyDetails['latitude'] = $this->input->post('latitude');
-        $companyDetails['longitude'] = $this->input->post('longitude');
         $companyDetails['gst_no'] = $this->input->post('gst_no');
         $companyDetails['pan_no'] = $this->input->post('pan_no');
         $companyDetails['tin_no'] = $this->input->post('tin_no');
@@ -82,7 +102,38 @@ class Vendor extends MY_Controller {
         $companyDetails['service_tax_id_verified'] = $this->input->post('service_tax_id_verified');
         $companyDetails['service_tax_id_comment'] = $this->input->post('service_tax_id_comment');
         $companyDetails['comment'] = $this->input->post('comment');
-        $this->dml->update(TBL_VENDOR_COMPANY_DETAILS, 'vendor_id', $vendorID, $companyDetails);
+        if (!empty($_FILES['gst_doc']['name'])) {
+            $companyDetails['gst_doc'] = uploadFile('gst_doc', 'gst/');
+        }
+        if (!empty($_FILES['pan_doc']['name'])) {
+            $companyDetails['pan_doc'] = uploadFile('pan_doc', 'pan/');
+        }
+        if (!empty($_FILES['tin_doc']['name'])) {
+            $companyDetails['tin_doc'] = uploadFile('tin_doc', 'tin/');
+        }
+        if (!empty($_FILES['service_tax_doc']['name'])) {
+            $companyDetails['service_tax_doc'] = uploadFile('service_tax_doc', 'service_tax/');
+        }
+        if (!empty($vendorID) && $this->model->isAvailable(TBL_VENDOR_COMPANY_DETAILS, $vendorID) === false) { // Insert
+            $companyDetails['vendor_id'] = $vendorID;
+            $this->dml->insert(TBL_VENDOR_COMPANY_DETAILS, $companyDetails);
+        } else { // Update
+            $this->dml->update(TBL_VENDOR_COMPANY_DETAILS, 'vendor_id', $vendorID, $companyDetails);
+        }
+    }
+
+    public function insert() {
+        $vendorID = $this->input->post('vendor_id');
+        $result = $this->saveVendor($vendorID);
+        $this->saveBankDetails($result['id']);
+        $this->saveCompanyDetails($result['id']);
+        if (empty($vendorID)) { // Insert
+            $message = getDesignedMessage('Vendor profile saved successfully.');
+        } else { // Update
+            $message = getDesignedMessage('Vendor profile updated successfully.');
+        }
+        $this->session->set_flashdata('message', $message);
+        redirect(base_url('admin/vendor/'));
     }
 
 }
