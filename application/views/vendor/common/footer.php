@@ -60,6 +60,12 @@
         $('#uploadedDocument').attr('src', documentURL);
         $('#viewDoc').modal('show');
     }
+    $('#filter_button').on('click', function () {
+        var keyWord = $('#key_word').val() != '' ? encodeURI($('#key_word').val()) : 0;
+        var status = encodeURI($('#status').val());
+        var url = $('#url').val();
+        window.location.href = url + keyWord + '/' + status;
+    });
     <?php if(isset($status)): ?>
         $('#accountModal').modal('show');
     <?php endif; ?>

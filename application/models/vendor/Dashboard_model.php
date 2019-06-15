@@ -6,7 +6,7 @@ class Dashboard_model extends CI_Model {
 
     public function __construct() {
         parent::__construct();
-        $vendorID = $this->session->userdata('vendor_id');
+        $this->vendorID = $this->session->userdata('vendor_id');
     }
 
     public function getCounts() {

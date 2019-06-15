@@ -10,7 +10,7 @@ class Dashboard extends MY_Controller {
     }
 
     public function index($status = '') {
-        $data['status'] = dycrypt($status);
+        $data['status'] = !empty($status) ? dycrypt($status) : null;
         $data['counts'] = $this->model->getCounts();
         $this->displayVendor('dashboard/index', $data, true);
     }
