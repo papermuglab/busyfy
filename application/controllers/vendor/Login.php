@@ -7,6 +7,7 @@ class Login extends MY_Controller {
         if ($this->session->userdata('vendor_id') != "") {
             redirect(base_url('vendor/dashboard'));
         }
+        $this->load->helper(array('encrypt_uri'));
         $this->load->library('form_validation');
     }
 
@@ -22,7 +23,7 @@ class Login extends MY_Controller {
             $res = $this->oauth->verify($para);
             if (!empty($res)) {
                 $this->setSession($res);
-                $redirect = 'vendor/dashboard';
+                $redirect = 'vendor/dashboard/';
             } else {
                 $redirect = 'vendor/login';
                 $this->session->set_flashdata('message', '<div class="alert alert-danger">Invalid credentials.</div>');
@@ -36,6 +37,7 @@ class Login extends MY_Controller {
     function setSession($para) {
         $this->session->set_userdata('vendor_id', $para['vendor_id']);
         $this->session->set_userdata('vendor_name', $para['name']);
+        $this->session->set_userdata('vendor_status', $para['status']);
     }
 
 }

@@ -55,6 +55,12 @@
 <script src="<?php echo base_url('assets/vendor/'); ?>js/sb-admin-2.min.js"></script>
 <script src="<?php echo base_url('assets/vendor/'); ?>js/common.js"></script>
 <script src="<?php echo base_url('assets/vendor/'); ?>js/validation-forms.js"></script>
+<script>
+    function showDocument(documentURL) {
+        $('#uploadedDocument').attr('src', documentURL);
+        $('#viewDoc').modal('show');
+    }
+</script>
 </body>
 
 </html>
