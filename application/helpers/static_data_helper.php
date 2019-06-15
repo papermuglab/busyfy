@@ -59,3 +59,20 @@ function getAccountStatusName($id) {
     }
     return $name;
 }
+
+function getNormalStatus() {
+    return array(0 => 'Inactive', 1 => 'Active');
+}
+
+function getNormalStatusName($id) {
+    $name = '';
+    switch ($id) {
+        case 0:
+            $name = 'Inactive';
+            break;
+        case 1:
+            $name = 'Active';
+            break;
+    }
+    return $name;
+}
