@@ -23,7 +23,7 @@ class Login extends MY_Controller {
             $res = $this->oauth->verify($para);
             if (!empty($res)) {
                 $this->setSession($res);
-                $redirect = 'vendor/dashboard/';
+                $redirect = $res['status'] == '1' ? 'vendor/dashboard/' : 'vendor/dashboard/' . encrypt($res['status']);
             } else {
                 $redirect = 'vendor/login';
                 $this->session->set_flashdata('message', '<div class="alert alert-danger">Invalid credentials.</div>');

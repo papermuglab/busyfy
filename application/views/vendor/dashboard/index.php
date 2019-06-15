@@ -16,7 +16,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Total Products</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo 0; ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $counts['total_vendors']; ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-calendar fa-2x text-gray-300"></i>
@@ -33,7 +33,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Total Staff</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo 0; ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $counts['total_staff']; ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -52,7 +52,7 @@
                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Task</div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo 0; ?></div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $counts['total_task']; ?></div>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">Pending Task</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo 0; ?></div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800"><?php echo $counts['total_pending_task']; ?></div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-comments fa-2x text-gray-300"></i>
@@ -84,3 +84,4 @@
 
 </div>
 <!-- /.container-fluid -->
+<?php $this->view('vendor/dashboard/modal'); ?>

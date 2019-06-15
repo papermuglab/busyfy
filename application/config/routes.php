@@ -58,5 +58,6 @@ $route['manage'] = 'admin/login';
 $route['admin'] = 'admin/login';
 
 // Vendor
+$route['vendor/dashboard/(:any)'] = 'vendor/dashboard/index/$1'; 
 $route['vendor/dashboard'] = 'vendor/dashboard/index';
 $route['vendor'] = 'vendor/login';
