@@ -6,10 +6,12 @@ class Dashboard extends MY_Controller {
         parent::__construct();
         $this->load->helper(array('check_admin_session'));
         isLoggedIn();
+        $this->load->model('admin/dashboard_model', 'model');
     }
 
     public function index() {
-        $this->displayAdmin('dashboard/index');
+        $data['counts'] = $this->model->getCounts();
+        $this->displayAdmin('dashboard/index', $data, true);
     }
 
 }
