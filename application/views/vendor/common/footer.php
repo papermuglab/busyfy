@@ -60,6 +60,9 @@
         $('#uploadedDocument').attr('src', documentURL);
         $('#viewDoc').modal('show');
     }
+    <?php if(isset($status)): ?>
+        $('#accountModal').modal('show');
+    <?php endif; ?>
 </script>
 </body>
 
