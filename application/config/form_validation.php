@@ -425,6 +425,185 @@ $config = array(
             'rules' => 'required|trim'
         )
     ),
+    'admin_add_vendor' => array(
+        array(
+            'field' => 'owner_name',
+            'label' => 'Owner name',
+            'rules' => 'required|trim|alpha_numeric_spaces'
+        ),
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|callback_checkEmailUniqueness|valid_email'
+        ),
+        array(
+            'field' => 'mobile',
+            'label' => 'Mobile',
+            'rules' => 'required|callback_checkMobileUniqueness|integer'
+        ),
+        array(
+            'field' => 'residential_address',
+            'label' => 'Residential address',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'company_name',
+            'label' => 'Company name',
+            'rules' => 'required|alpha_numeric_spaces|trim'
+        ),
+        array(
+            'field' => 'domain_type',
+            'label' => 'Domain type',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'billing_address',
+            'label' => 'Billing address',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'bank_name',
+            'label' => 'Bank name',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'account_type',
+            'label' => 'Account type',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'account_no',
+            'label' => 'Account no',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'ifsc_code',
+            'label' => 'IFSC code',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'gst_no',
+            'label' => 'GST no',
+            'rules' => 'required|callback_checkGSTNOUniqueness'
+        ),
+        array(
+            'field' => 'pan_no',
+            'label' => 'PAN no',
+            'rules' => 'required|callback_checkPANNOUniqueness'
+        ),
+        array(
+            'field' => 'tin_no',
+            'label' => 'TIN no',
+            'rules' => 'required|callback_checkTINNOUniqueness'
+        ),
+        array(
+            'field' => 'service_tax_id',
+            'label' => 'Service tax id',
+            'rules' => 'required|callback_checkServiceTaxNOUniqueness'
+        ),
+        array(
+            'field' => 'gst_doc',
+            'label' => 'GST document',
+            'rules' => 'callback_checkGST'
+        ),
+        array(
+            'field' => 'pan_doc',
+            'label' => 'PAN document',
+            'rules' => 'callback_checkPan'
+        ),
+        array(
+            'field' => 'tin_doc',
+            'label' => 'TIN document',
+            'rules' => 'callback_checkTIN'
+        ),
+        array(
+            'field' => 'service_tax_doc',
+            'label' => 'Service tax document',
+            'rules' => 'callback_checkServiceTax'
+        )
+    ),
+    'ca_edit_vendor' => array(
+        array(
+            'field' => 'owner_name',
+            'label' => 'Owner name',
+            'rules' => 'required|trim|alpha_numeric_spaces'
+        ),
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|callback_checkEmailUniqueness|valid_email'
+        ),
+        array(
+            'field' => 'mobile',
+            'label' => 'Mobile',
+            'rules' => 'required|callback_checkMobileUniqueness|integer'
+        ),
+        array(
+            'field' => 'residential_address',
+            'label' => 'Residential address',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'company_name',
+            'label' => 'Company name',
+            'rules' => 'required|alpha_numeric_spaces|trim'
+        ),
+        array(
+            'field' => 'domain_type',
+            'label' => 'Domain type',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'billing_address',
+            'label' => 'Billing address',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'bank_name',
+            'label' => 'Bank name',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'account_type',
+            'label' => 'Account type',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'account_no',
+            'label' => 'Account no',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'ifsc_code',
+            'label' => 'IFSC code',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'gst_no',
+            'label' => 'GST no',
+            'rules' => 'required|callback_checkGSTNOUniqueness'
+        ),
+        array(
+            'field' => 'pan_no',
+            'label' => 'PAN no',
+            'rules' => 'required|callback_checkPANNOUniqueness'
+        ),
+        array(
+            'field' => 'tin_no',
+            'label' => 'TIN no',
+            'rules' => 'required|callback_checkTINNOUniqueness'
+        ),
+        array(
+            'field' => 'service_tax_id',
+            'label' => 'Service tax id',
+            'rules' => 'required|callback_checkServiceTaxNOUniqueness'
+        ),
+        array(
+            'field' => 'status',
+            'label' => 'Status',
+            'rules' => 'required'
+        )
+    ),
     'error_prefix' => '<span style="color:red">',
     'error_suffix' => '</span>'
 );

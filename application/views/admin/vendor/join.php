@@ -23,11 +23,11 @@
                                 <?php echo form_error('owner_name'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter email" name="email" id="email" value="<?php if(isset($vendor['email'])){ echo $vendor['email']; } ?>" <?php if(isset($vendor['email'])){ echo 'readonly'; } ?>>
+                                <input type="text" class="form-control" placeholder="Enter email" name="email" id="email" value="<?php if(set_value('email')){ echo set_value('email'); }elseif(isset($vendor['email'])){ echo $vendor['email']; } ?>" <?php if(isset($vendor['email'])){ echo 'readonly'; } ?>>
                                 <?php echo form_error('email'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter mobile" name="mobile" id="mobile" value="<?php if(isset($vendor['mobile'])){ echo $vendor['mobile']; } ?>" <?php if(isset($vendor['mobile'])){ echo 'readonly'; } ?>>
+                                <input type="text" class="form-control" placeholder="Enter mobile" name="mobile" id="mobile" value="<?php if(set_value('mobile')){ echo set_value('mobile'); }elseif(isset($vendor['mobile'])){ echo $vendor['mobile']; } ?>" <?php if(isset($vendor['mobile'])){ echo 'readonly'; } ?>>
                                 <?php echo form_error('mobile'); ?>
                             </div>
                             <div class="form-group">
@@ -85,7 +85,7 @@
                             <?php $accountTypes = getAccountStatus(); ?>
                             <div class="form-group">
                                 <select class="form-control" name="status" id="status">
-                                    <option value="">Select Account Type</option>
+                                    <option value="">Select Account Status</option>
                                     <?php foreach($accountTypes AS $key => $account): ?>
                                     <option value="<?php echo $key; ?>" <?php if(isset($vendor)){ if($vendor['status'] == $key){ echo 'selected'; } } ?>><?php echo $account; ?></option>
                                     <?php endforeach; ?>
@@ -140,7 +140,7 @@
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="gst_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['gst_verified'] == 0){ echo 'checked'; }elseif(isset($company) && $company['gst_verified'] != 1){ echo 'checked'; } } ?>>
+                                    <input name="gst_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['gst_verified'] == 0){ echo 'checked'; } }else{ echo 'checked'; } ?>>
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="pan_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['pan_verified'] == 0){ echo 'checked'; } } ?>>
+                                    <input name="pan_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['pan_verified'] == 0){ echo 'checked'; } }else{ echo 'checked'; } ?>>
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
@@ -202,7 +202,7 @@
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="tin_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['tin_verified'] == 0){ echo 'checked'; } } ?>>
+                                    <input name="tin_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['tin_verified'] == 0){ echo 'checked'; } }else{ echo 'checked'; } ?>>
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>
@@ -233,7 +233,7 @@
                                     <label class="form-check-label" for="inlineCheckbox1">Yes</label>
                                 </div>
                                 <div class="form-check form-check-inline">
-                                    <input name="service_tax_id_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['service_tax_id_verified'] == 0){ echo 'checked'; } } ?>>
+                                    <input name="service_tax_id_verified" class="form-check-input" type="radio" value="0" <?php if(isset($company)){ if($company['service_tax_id_verified'] == 0){ echo 'checked'; } }else{ echo 'checked'; } ?>>
                                     <label class="form-check-label" for="inlineCheckbox2">No</label>
                                 </div>
                             </div>

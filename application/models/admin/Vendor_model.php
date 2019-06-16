@@ -41,4 +41,16 @@ class Vendor_model extends CI_Model {
         return !empty($row) ? true : false;
     }
 
+    public function isValueUnique($table, $field, $value, $vendorID = 0) {
+        $this->db->select('vendor_id');
+        $this->db->from($table);
+        if (!empty($vendorID)) {
+            $this->db->where('vendor_id !=', $vendorID);
+        }
+        $this->db->where($field, $value);
+        $this->db->limit(1);
+        $row = $this->db->get()->row();
+        return empty($row) ? true : false;
+    }
+
 }

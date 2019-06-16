@@ -21,8 +21,7 @@
                             <?php if(!isset($product)): ?>
                             <div class="form-group">
                                 <label>Select Vendor:</label>
-                                <select class="form-control" name="vendor_id" id="vendor_id">
-                                    <option value="">Select Vendor</option>
+                                <select class="form-control" name="vendor_id" id="vendor_id" required="required">
                                     <?php foreach($vendorList AS $vendor): ?>
                                     <option value="<?php echo $vendor['key']; ?>"><?php echo $vendor['value']; ?></option>
                                     <?php endforeach; ?>
@@ -35,7 +34,7 @@
                                 <?php echo form_error('name'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter sku" name="sku" id="sku" value="<?php if(isset($product['sku'])){ echo $product['sku']; } ?>" <?php if(isset($product['sku'])){ echo 'readonly'; } ?>>
+                                <input type="text" class="form-control" placeholder="Enter sku" name="sku" id="sku" value="<?php if(set_value('sku')){ echo set_value('sku'); }elseif(isset($product['sku'])){ echo $product['sku']; } ?>" <?php if(isset($product['sku'])){ echo 'readonly'; } ?>>
                                 <?php echo form_error('sku'); ?>
                             </div>
                             <?php $types = getProductTypes(); ?>
@@ -48,7 +47,7 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter cost" name="cost" id="cost" value="<?php if(isset($product['cost'])){ echo $product['cost']; } ?>">
+                                <input type="text" class="form-control" placeholder="Enter cost" name="cost" id="cost" value="<?php if(set_value('cost')){ echo set_value('cost'); }elseif(isset($product['cost'])){ echo $product['cost']; } ?>">
                                 <?php echo form_error('cost'); ?>
                             </div>
                             <?php $status = getNormalStatus(); ?>
