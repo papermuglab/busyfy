@@ -23,7 +23,7 @@
                                 <?php echo form_error('name'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter sku" name="sku" id="sku" value="<?php if(isset($product['sku'])){ echo $product['sku']; } ?>" <?php if(isset($product['sku'])){ echo 'readonly'; } ?>>
+                                <input type="text" class="form-control" placeholder="Enter sku" name="sku" id="sku" value="<?php if(set_value('sku')){ echo set_value('sku'); }elseif(isset($product['sku'])){ echo $product['sku']; } ?>" <?php if(isset($product['sku'])){ echo 'readonly'; } ?>>
                                 <?php echo form_error('sku'); ?>
                             </div>
                             <?php $types = getProductTypes(); ?>
@@ -34,9 +34,10 @@
                                     <option value="<?php echo $key; ?>" <?php if(isset($product)){ if($product['type'] == $key){ echo 'selected'; } } ?>><?php echo $value; ?></option>
                                     <?php endforeach; ?>
                                 </select>
+                                <?php echo form_error('type'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter cost" name="cost" id="cost" value="<?php if(isset($product['cost'])){ echo $product['cost']; } ?>">
+                                <input type="text" class="form-control" placeholder="Enter cost" name="cost" id="cost" value="<?php if(set_value('cost')){ echo set_value('cost'); }elseif(isset($product['cost'])){ echo $product['cost']; } ?>">
                                 <?php echo form_error('cost'); ?>
                             </div>
                             <?php $status = getNormalStatus(); ?>

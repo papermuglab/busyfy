@@ -73,18 +73,6 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputEmail4">Latitude (Company Location)</label>
-                        <input type="text" class="form-control" name="latitude" id="latitude" placeholder="Latitude" value="<?php if(set_value('latitude')){ echo set_value('latitude'); } ?>">
-                        <?php echo form_error('latitude'); ?>
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputPassword4">Logitude (Company Location)</label>
-                        <input type="text" class="form-control" name="longitude" id="longitude" placeholder="Longitude" value="<?php if(set_value('longitude')){ echo set_value('longitude'); } ?>">
-                        <?php echo form_error('longitude'); ?>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
                         <label for="inputEmail4">GST No</label>
                         <input type="text" class="form-control" name="gst_no" id="gst_no" placeholder="GST No" value="<?php if(set_value('gst_no')){ echo set_value('gst_no'); } ?>">
                         <?php echo form_error('gst_no'); ?>

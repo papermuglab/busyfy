@@ -19,12 +19,16 @@ class Profile extends MY_Controller {
     }
 
     public function save() {
-        $vendorID = $this->input->post('vendor_id');
-        $this->saveVendor($vendorID);
-        $this->saveBankDetails($vendorID);
-        $this->saveCompanyDetails($vendorID);
-        $this->session->set_flashdata('message', getDesignedMessage('Profile updated successfully.'));
-        redirect(base_url('vendor/profile'));
+        if ($this->form_validation->run('vendor_edit_profile') == true) {
+            $vendorID = $this->input->post('vendor_id');
+            $this->saveVendor($vendorID);
+            $this->saveBankDetails($vendorID);
+            $this->saveCompanyDetails($vendorID);
+            $this->session->set_flashdata('message', getDesignedMessage('Profile updated successfully.'));
+            redirect(base_url('vendor/profile'));
+        } else {
+            $this->index();
+        }
     }
 
     public function saveVendor($vendorID) {
@@ -126,6 +130,94 @@ class Profile extends MY_Controller {
             redirect(base_url('vendor/profile/changePassword'));
         } else {
             $this->changePassword();
+        }
+    }
+
+    public function checkGST($value) {
+        if (!empty($_FILES['gst_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['gst_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkGST', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkPan($value) {
+        if (!empty($_FILES['pan_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['pan_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkPan', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkTIN($value) {
+        if (!empty($_FILES['tin_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['tin_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkTIN', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkServiceTax($value) {
+        if (!empty($_FILES['service_tax_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['service_tax_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkServiceTax', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkServiceTaxNOUniqueness($value) {
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'service_tax_id', $value) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkServiceTaxNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkTINNOUniqueness($value) {
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'tin_no', $value) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkTINNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkGSTNOUniqueness($value) {
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'gst_no', $value) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkGSTNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkPANNOUniqueness($value) {
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'pan_no', $value) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkPANNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
         }
     }
 

@@ -20,7 +20,7 @@ class Product extends MY_Controller {
         $status = $this->uri->segment(5) != '' ? urldecode($this->uri->segment(5)) : '';
         $offset = (empty($this->uri->segment(6))) ? 0 : $this->uri->segment(6);
         $config["uri_segment"] = 6;
-        $config["base_url"] = base_url('vendor/staff/index/'. urlencode($keyWord) . '/' . urlencode($status));
+        $config["base_url"] = base_url('vendor/staff/index/' . urlencode($keyWord) . '/' . urlencode($status));
         $config["total_rows"] = $this->model->getListCount($keyWord, $status);
         $this->pagination->initialize($config);
         $data['products'] = $this->model->getList($offset, $keyWord, $status);
@@ -41,21 +41,29 @@ class Product extends MY_Controller {
 
     public function save() {
         $productID = $this->input->post('product_id');
-        $product['name'] = $this->input->post('name');
-        $product['sku'] = $this->input->post('sku');
-        $product['type'] = $this->input->post('type');
-        $product['cost'] = $this->input->post('cost');
-        $product['status'] = $this->input->post('status');
-        if (!empty($productID)) { // Update
-            $this->dml->update(TBL_PRODUCTS, 'product_id', $productID, $product);
-            $message = getDesignedMessage('Product updated successfully.');
-        } else { // Insert
-            $product['vendor_id'] = $this->vendorID;
-            $this->dml->insert(TBL_PRODUCTS, $product);
-            $message = getDesignedMessage('Product saved successfully.');
+        if ($this->form_validation->run('vendor_add_product') == true) {
+            $product['name'] = $this->input->post('name');
+            $product['sku'] = $this->input->post('sku');
+            $product['type'] = $this->input->post('type');
+            $product['cost'] = $this->input->post('cost');
+            $product['status'] = $this->input->post('status');
+            if (!empty($productID)) { // Update
+                $this->dml->update(TBL_PRODUCTS, 'product_id', $productID, $product);
+                $message = getDesignedMessage('Product updated successfully.');
+            } else { // Insert
+                $product['vendor_id'] = $this->vendorID;
+                $this->dml->insert(TBL_PRODUCTS, $product);
+                $message = getDesignedMessage('Product saved successfully.');
+            }
+            $this->session->set_flashdata('message', $message);
+            redirect(base_url('vendor/product/'));
+        } else {
+            if (!empty($productID)) {
+                $this->edit(encrypt($productID));
+            } else {
+                $this->add();
+            }
         }
-        $this->session->set_flashdata('message', $message);
-        redirect(base_url('vendor/product/'));
     }
 
 }

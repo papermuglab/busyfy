@@ -2,6 +2,13 @@
 
 class Profile_model extends CI_Model {
 
+    private $vendorID;
+
+    public function __construct() {
+        parent::__construct();
+        $this->vendorID = $this->session->userdata('vendor_id');
+    }
+
     public function isUniqueGSTNo($value, $vendorId) {
         $this->db->select('COUNT(vendor_id) AS count');
         $this->db->from(TBL_VENDORS);
@@ -37,6 +44,16 @@ class Profile_model extends CI_Model {
         $this->db->limit(1);
         $row = $this->db->get()->row();
         return !empty($row) ? true : false;
+    }
+
+    public function isValueUnique($table, $field, $value) {
+        $this->db->select('vendor_id');
+        $this->db->from($table);
+        $this->db->where('vendor_id !=', $this->vendorID);
+        $this->db->where($field, $value);
+        $this->db->limit(1);
+        $row = $this->db->get()->row();
+        return empty($row) ? true : false;
     }
 
 }

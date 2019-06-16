@@ -20,7 +20,7 @@ class Staff extends MY_Controller {
         $status = $this->uri->segment(5) != '' ? urldecode($this->uri->segment(5)) : '';
         $offset = (empty($this->uri->segment(6))) ? 0 : $this->uri->segment(6);
         $config["uri_segment"] = 6;
-        $config["base_url"] = base_url('vendor/staff/index/'. urlencode($keyWord) . '/' . urlencode($status));
+        $config["base_url"] = base_url('vendor/staff/index/' . urlencode($keyWord) . '/' . urlencode($status));
         $config["total_rows"] = $this->model->getListCount($keyWord, $status);
         $this->pagination->initialize($config);
         $data['staffs'] = $this->model->getList($offset, $keyWord, $status);
@@ -42,22 +42,30 @@ class Staff extends MY_Controller {
 
     public function save() {
         $staffID = $this->input->post('staff_id');
-        $staff['name'] = $this->input->post('name');
-        $staff['email'] = $this->input->post('email');
-        $staff['mobile'] = $this->input->post('mobile');
-        $staff['address'] = $this->input->post('address');
-        $staff['status'] = $this->input->post('status');
-        if (!empty($staffID)) { // Update
-            $this->dml->update(TBL_STAFF, 'staff_id', $staffID, $staff);
-            $message = getDesignedMessage('Staff profile updated successfully.');
-        } else { // Insert
-            $staff['vendor_id'] = $this->vendorID;
-            $staff['password'] = md5(getRandomString(6));
-            $this->dml->insert(TBL_STAFF, $staff);
-            $message = getDesignedMessage('Staff profile saved successfully.');
+        if ($this->form_validation->run('vendor_add_staff') == true) {
+            $staff['name'] = $this->input->post('name');
+            $staff['email'] = $this->input->post('email');
+            $staff['mobile'] = $this->input->post('mobile');
+            $staff['address'] = $this->input->post('address');
+            $staff['status'] = $this->input->post('status');
+            if (!empty($staffID)) { // Update
+                $this->dml->update(TBL_STAFF, 'staff_id', $staffID, $staff);
+                $message = getDesignedMessage('Staff profile updated successfully.');
+            } else { // Insert
+                $staff['vendor_id'] = $this->vendorID;
+                $staff['password'] = md5(getRandomString(6));
+                $this->dml->insert(TBL_STAFF, $staff);
+                $message = getDesignedMessage('Staff profile saved successfully.');
+            }
+            $this->session->set_flashdata('message', $message);
+            redirect(base_url('vendor/staff/'));
+        } else {
+            if (!empty($staffID)) {
+                $this->edit(encrypt($staffID));
+            } else {
+                $this->add();
+            }
         }
-        $this->session->set_flashdata('message', $message);
-        redirect(base_url('vendor/staff/'));
     }
 
 }
