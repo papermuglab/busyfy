@@ -49,11 +49,15 @@ class Vendor extends MY_Controller {
 
     public function save() {
         $vendorID = $this->input->post('vendor_id');
-        $this->saveVendor($vendorID);
-        $this->saveBankDetails($vendorID);
-        $this->saveCompanyDetails($vendorID);
-        $this->session->set_flashdata('message', getDesignedMessage('Vendor profile updated successfully.'));
-        redirect(base_url('admin/vendor/'));
+        if ($this->form_validation->run('ca_edit_vendor') == true) {
+            $this->saveVendor($vendorID);
+            $this->saveBankDetails($vendorID);
+            $this->saveCompanyDetails($vendorID);
+            $this->session->set_flashdata('message', getDesignedMessage('Vendor profile updated successfully.'));
+            redirect(base_url('admin/vendor/'));
+        } else {
+            $this->edit(encrypt($vendorID));
+        }
     }
 
     public function saveVendor($vendorID) {
@@ -124,16 +128,136 @@ class Vendor extends MY_Controller {
 
     public function insert() {
         $vendorID = $this->input->post('vendor_id');
-        $result = $this->saveVendor($vendorID);
-        $this->saveBankDetails($result['id']);
-        $this->saveCompanyDetails($result['id']);
-        if (empty($vendorID)) { // Insert
-            $message = getDesignedMessage('Vendor profile saved successfully.');
-        } else { // Update
-            $message = getDesignedMessage('Vendor profile updated successfully.');
+        if ($this->form_validation->run('admin_add_vendor') == true) {
+            $result = $this->saveVendor($vendorID);
+            $this->saveBankDetails($result['id']);
+            $this->saveCompanyDetails($result['id']);
+            if (empty($vendorID)) { // Insert
+                $message = getDesignedMessage('Vendor profile saved successfully.');
+            } else { // Update
+                $message = getDesignedMessage('Vendor profile updated successfully.');
+            }
+            $this->session->set_flashdata('message', $message);
+            redirect(base_url('admin/vendor/'));
+        } else {
+            if (!empty($vendorID)) {
+                $this->correct(dycrypt($vendorID));
+            } else {
+                $this->join();
+            }
         }
-        $this->session->set_flashdata('message', $message);
-        redirect(base_url('admin/vendor/'));
+    }
+
+    public function checkGST($value) {
+        if (!empty($_FILES['gst_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['gst_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkGST', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkPan($value) {
+        if (!empty($_FILES['pan_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['pan_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkPan', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkTIN($value) {
+        if (!empty($_FILES['tin_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['tin_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkTIN', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkServiceTax($value) {
+        if (!empty($_FILES['service_tax_doc']['name'])) {
+            if (FILE_SIZE_LIMIT <= $_FILES['service_tax_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkServiceTax', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
+        } else {
+            return true;
+        }
+    }
+
+    public function checkServiceTaxNOUniqueness($value) {
+        $vendorID = $this->input->post('vendor_id');
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'service_tax_id', $value, $vendorID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkServiceTaxNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkTINNOUniqueness($value) {
+        $vendorID = $this->input->post('vendor_id');
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'tin_no', $value, $vendorID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkTINNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkGSTNOUniqueness($value) {
+        $vendorID = $this->input->post('vendor_id');
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'gst_no', $value, $vendorID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkGSTNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkPANNOUniqueness($value) {
+        $vendorID = $this->input->post('vendor_id');
+        if ($this->model->isValueUnique(TBL_VENDOR_COMPANY_DETAILS, 'pan_no', $value, $vendorID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkPANNOUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkEmailUniqueness($value) {
+        $vendorID = $this->input->post('vendor_id');
+        if ($this->model->isValueUnique(TBL_VENDORS, 'email', $value, $vendorID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkEmailUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkMobileUniqueness($value) {
+        $vendorID = $this->input->post('vendor_id');
+        if ($this->model->isValueUnique(TBL_VENDORS, 'mobile', $value, $vendorID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkMobileUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
     }
 
 }

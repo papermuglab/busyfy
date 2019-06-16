@@ -21,8 +21,7 @@
                             <?php if(!isset($staff)): ?>
                             <div class="form-group">
                                 <label>Select Vendor:</label>
-                                <select class="form-control" name="vendor_id" id="vendor_id">
-                                    <option value="">Select Vendor</option>
+                                <select class="form-control" name="vendor_id" id="vendor_id" required="required">
                                     <?php foreach($vendorList AS $vendor): ?>
                                     <option value="<?php echo $vendor['key']; ?>"><?php echo $vendor['value']; ?></option>
                                     <?php endforeach; ?>
@@ -35,11 +34,11 @@
                                 <?php echo form_error('name'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter email" name="email" id="email" value="<?php if(isset($staff['email'])){ echo $staff['email']; } ?>" <?php if(isset($staff['email'])){ echo 'readonly'; } ?>>
+                                <input type="text" class="form-control" placeholder="Enter email" name="email" id="email" value="<?php if(set_value('email')){ echo set_value('email'); }elseif(isset($staff['email'])){ echo $staff['email']; } ?>" <?php if(isset($staff['email'])){ echo 'readonly'; } ?>>
                                 <?php echo form_error('email'); ?>
                             </div>
                             <div class="form-group">
-                                <input type="text" class="form-control" placeholder="Enter mobile" name="mobile" id="mobile" value="<?php if(isset($staff['mobile'])){ echo $staff['mobile']; } ?>" <?php if(isset($staff['mobile'])){ echo 'readonly'; } ?>>
+                                <input type="text" class="form-control" placeholder="Enter mobile" name="mobile" id="mobile" value="<?php if(set_value('mobile')){ echo set_value('mobile'); }elseif(isset($staff['mobile'])){ echo $staff['mobile']; } ?>" <?php if(isset($staff['mobile'])){ echo 'readonly'; } ?>>
                                 <?php echo form_error('mobile'); ?>
                             </div>
                             <div class="form-group">
