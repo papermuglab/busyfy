@@ -60,7 +60,7 @@ class Vendor extends MY_Controller {
         $vendor['owner_name'] = $this->input->post('owner_name');
         $vendor['email'] = $this->input->post('email');
         $vendor['mobile'] = $this->input->post('mobile');
-        $vendor['password'] = md5($this->input->post('password'));
+        //$vendor['password'] = md5($this->input->post('password'));
         $vendor['residential_address'] = $this->input->post('residential_address');
         $vendor['company_name'] = $this->input->post('company_name');
         $vendor['domain_type'] = $this->input->post('domain_type');

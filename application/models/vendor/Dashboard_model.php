@@ -10,19 +10,18 @@ class Dashboard_model extends CI_Model {
     }
 
     public function getCounts() {
-        $data['total_vendors'] = $this->getTotalVendors();
+        $data['total_products'] = $this->getTotalProducts();
         $data['total_staff'] = $this->getTotalStaff();
         $data['total_task'] = $this->getTotalTask();
         $data['total_pending_task'] = $this->getTotalPendingTask();
         return $data;
     }
 
-    public function getTotalVendors() {
+    public function getTotalProducts() {
         $this->db->select('COUNT(vendor_id) AS total');
-        $this->db->from(TBL_VENDORS);
+        $this->db->from(TBL_PRODUCTS);
         $this->db->where('is_deleted', NOT_DELETED);
         $this->db->where('vendor_id', $this->vendorID);
-        $this->db->where('status !=', '3');
         return $this->db->get()->row()->total;
     }
 

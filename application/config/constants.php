@@ -104,7 +104,7 @@ defined("TBL_VENDOR_COMPANY_DETAILS") OR define("TBL_VENDOR_COMPANY_DETAILS", "v
 defined("TBL_VENDOR_LOGIN_LOGS") OR define("TBL_VENDOR_LOGIN_LOGS", "vendor_login_logs");
 
 // File details
-
+defined('FILE_SIZE_LIMIT') OR define('FILE_SIZE_LIMIT', '‭2097152‬');
 
 // Static Variable
 defined("INACTIVE") OR define("INACTIVE", "0");

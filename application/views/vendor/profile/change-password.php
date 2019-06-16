@@ -14,14 +14,17 @@
                 <div class="form-group">
                     <label for="email">Old Password:</label>
                     <input type="password" class="form-control" placeholder="Enter old password" name="old_password" id="old_password">
+                    <?php echo form_error('old_password'); ?>
                 </div>
                 <div class="form-group">
                     <label for="email">New Password:</label>
                     <input type="password" class="form-control" placeholder="Enter new password" name="new_password" id="new_password">
+                    <?php echo form_error('new_password'); ?>
                 </div>
                 <div class="form-group">
                     <label for="email">Re-type New Password:</label>
                     <input type="password" class="form-control" placeholder="Enter Re-type new password" name="re_type_password" id="re_type_password">
+                    <?php echo form_error('re_type_password'); ?>
                 </div>
                 <a href="#" class="btn btn-primary btn-icon-split" onclick="history.back();">
                     <span class="text">Cancel</span>

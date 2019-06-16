@@ -67,8 +67,6 @@ class Registration extends MY_Controller {
     public function saveCompanyDetails($vendorID) {
         $this->load->helper('upload_file');
         $companyDetails['vendor_id'] = $vendorID;
-        $companyDetails['latitude'] = $this->input->post('latitude');
-        $companyDetails['longitude'] = $this->input->post('longitude');
         $companyDetails['gst_no'] = $this->input->post('gst_no');
         $companyDetails['pan_no'] = $this->input->post('pan_no');
         $companyDetails['tin_no'] = $this->input->post('tin_no');
@@ -96,7 +94,12 @@ class Registration extends MY_Controller {
             $this->form_validation->set_message('checkGST', 'The {field} must be required.');
             return FALSE;
         } else {
-            return TRUE;
+            if (FILE_SIZE_LIMIT <= $_FILES['gst_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkGST', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
         }
     }
 
@@ -105,7 +108,12 @@ class Registration extends MY_Controller {
             $this->form_validation->set_message('checkPan', 'The {field} must be required.');
             return FALSE;
         } else {
-            return TRUE;
+            if (FILE_SIZE_LIMIT <= $_FILES['pan_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkPan', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
         }
     }
 
@@ -114,7 +122,12 @@ class Registration extends MY_Controller {
             $this->form_validation->set_message('checkTIN', 'The {field} must be required.');
             return FALSE;
         } else {
-            return TRUE;
+            if (FILE_SIZE_LIMIT <= $_FILES['tin_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkTIN', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
         }
     }
 
@@ -123,7 +136,12 @@ class Registration extends MY_Controller {
             $this->form_validation->set_message('checkServiceTax', 'The {field} must be required.');
             return FALSE;
         } else {
-            return TRUE;
+            if (FILE_SIZE_LIMIT <= $_FILES['service_tax_doc']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkServiceTax', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
         }
     }
 
@@ -132,7 +150,12 @@ class Registration extends MY_Controller {
             $this->form_validation->set_message('checkLogo', 'The {field} must be required.');
             return FALSE;
         } else {
-            return TRUE;
+            if (FILE_SIZE_LIMIT <= $_FILES['logo']['size']) {
+                return TRUE;
+            } else {
+                $this->form_validation->set_message('checkLogo', 'The {field} size must be less than 2 MB required.');
+                return FALSE;
+            }
         }
     }
 
