@@ -7,7 +7,7 @@
     </div>
     <?php echo $this->session->flashdata('message'); ?>
     <form id="staffSave" action="<?php echo base_url('admin/staff/save'); ?>" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="staff_id" id="vendor_id" value="<?php if(isset($staff)){ echo $staff['staff_id']; } ?>">
+        <input type="hidden" name="staff_id" id="staff_id" value="<?php if(isset($staff)){ echo $staff['staff_id']; }else{ echo 0; } ?>">
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow mb-12">
@@ -28,6 +28,8 @@
                                 </select>
                                 <?php echo form_error('vendor_id'); ?>
                             </div>
+                            <?php else: ?>
+                            <input type="hidden" name="vendor_id" id="vendor_id" value="<?php if(isset($staff)){ echo $staff['vendor_id']; } ?>">
                             <?php endif; ?>
                             <div class="form-group">
                                 <input type="text" class="form-control" placeholder="Enter name" name="name" id="name" value="<?php if(set_value('name')){ echo set_value('name'); }elseif(isset($staff['name'])){ echo $staff['name']; } ?>">

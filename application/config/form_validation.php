@@ -390,7 +390,7 @@ $config = array(
         array(
             'field' => 'email',
             'label' => 'Email',
-            'rules' => 'required|trim|valid_email'
+            'rules' => 'required|trim|valid_email|callback_checkEmailUniqueness'
         ),
         array(
             'field' => 'address',
@@ -400,7 +400,7 @@ $config = array(
         array(
             'field' => 'mobile',
             'label' => 'Mobile',
-            'rules' => 'required|trim|exact_length[10]|integer'
+            'rules' => 'required|trim|exact_length[10]|integer|callback_checkMobileUniqueness'
         )
     ),
     'vendor_add_product' => array(
