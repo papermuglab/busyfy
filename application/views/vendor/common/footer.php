@@ -41,7 +41,7 @@
     </div>
 </div>
 <script>
-    var base_url = '<?php echo base_url('admin'); ?>';
+    var base_url = '<?php echo base_url('vendor'); ?>';
 </script>
 <!-- Bootstrap core JavaScript-->
 <script src="<?php echo base_url('assets/vendor/'); ?>vendor/jquery/jquery.min.js"></script>

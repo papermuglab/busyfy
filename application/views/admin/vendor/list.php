@@ -3,6 +3,7 @@
 <?php $method = $this->session->userdata('admin_role') == '1' ? 'correct' : 'edit'; ?>
     <!-- Page Heading -->
     <h1 class="h3 mb-2 text-gray-800">Vendor List</h1>
+    <span class="message"></span>
     <?php echo $this->session->flashdata('message'); ?>
     <div class="card shadow mb-4">
         <div class="card-header py-3">
