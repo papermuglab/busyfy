@@ -68,4 +68,24 @@ class Staff extends MY_Controller {
         }
     }
 
+    public function checkEmailUniqueness($value) {
+        $staffID = $this->input->post('staff_id');
+        if ($this->model->checkUniqueness('email', $value, $staffID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkEmailUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
+    public function checkMobileUniqueness($value) {
+        $staffID = $this->input->post('staff_id');
+        if ($this->model->checkUniqueness('mobile', $value, $staffID) == true) {
+            return TRUE;
+        } else {
+            $this->form_validation->set_message('checkMobileUniqueness', 'The {field} must be unique.');
+            return FALSE;
+        }
+    }
+
 }

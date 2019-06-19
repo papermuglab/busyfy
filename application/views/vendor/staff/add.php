@@ -7,7 +7,7 @@
     </div>
     <?php echo $this->session->flashdata('message'); ?>
     <form id="staffSave" action="<?php echo base_url('vendor/staff/save'); ?>" method="POST" enctype="multipart/form-data">
-        <input type="hidden" name="staff_id" id="vendor_id" value="<?php if(isset($staff)){ echo $staff['staff_id']; } ?>">
+        <input type="hidden" name="staff_id" id="staff_id" value="<?php if(isset($staff)){ echo $staff['staff_id']; }else{ echo 0; } ?>">
         <div class="row">
             <div class="col-md-12">
                 <div class="card shadow mb-12">

@@ -48,4 +48,15 @@ class Staff_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function checkUniqueness($field, $value, $vendorID, $staffID = 0) {
+        $this->db->select('COUNT(staff_id) AS total');
+        $this->db->from(TBL_STAFF);
+        $this->db->where($field, $value);
+        $this->db->where('vendor_id', $vendorID);
+        if ($staffID) {
+            $this->db->where('staff_id !=', $staffID);
+        }
+        return 0 == $this->db->get()->row()->total ? true : false;
+    }
+
 }

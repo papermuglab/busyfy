@@ -5,7 +5,7 @@ include_once APPPATH . 'custom_class/Model.php';
 class Staff_model extends CI_Model {
 
     private $vendorID;
-    
+
     public function __construct() {
         parent::__construct();
         $this->vendorID = $this->session->userdata('vendor_id');
@@ -40,6 +40,17 @@ class Staff_model extends CI_Model {
             $this->db->like('s.status', $status);
         }
         return $this->db->get()->row()->total;
+    }
+
+    public function checkUniqueness($field, $value, $staffID = 0) {
+        $this->db->select('COUNT(staff_id) AS total');
+        $this->db->from(TBL_STAFF);
+        $this->db->where($field, $value);
+        $this->db->where('vendor_id', $this->vendorID);
+        if ($staffID) {
+            $this->db->where('staff_id !=', $staffID);
+        }
+        return 0 == $this->db->get()->row()->total ? true : false;
     }
 
 }
