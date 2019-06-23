@@ -66,4 +66,8 @@ class Product extends MY_Controller {
         }
     }
 
+    public function getProductPrice() {
+        $productID = $this->input->get('productID');
+        echo $this->model->getPrice($productID);
+    }
 }
