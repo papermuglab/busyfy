@@ -47,4 +47,11 @@ class Product_model extends CI_Model {
         return $this->db->get()->result_array();
     }
 
+    public function getPrice($productID) {
+        $this->db->select('cost');
+        $this->db->from(TBL_PRODUCTS);
+        $this->db->where('product_id', $productID);
+        $this->db->limit(1);
+        return $this->db->get()->row()->cost;
+    }
 }
