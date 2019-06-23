@@ -17,4 +17,5 @@
 
   <!-- Custom styles for this template-->
   <link href="<?php echo base_url('assets/vendor/'); ?>css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="<?php echo base_url('assets/vendor/'); ?>css/jquery.datetimepicker.css" rel="stylesheet">
 </head>

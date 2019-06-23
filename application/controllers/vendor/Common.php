@@ -4,7 +4,7 @@ class Common extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->load->helper(array('check_admin_session', 'get_designed_message'));
+        $this->load->helper(array('check_vendor_session', 'get_designed_message'));
         isLoggedIn();
     }
 
