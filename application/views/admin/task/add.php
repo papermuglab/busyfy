@@ -3,7 +3,7 @@
 
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-2 text-gray-800">Staff Management - <?php echo isset($task) ? 'Edit' : 'Add'; ?></h1>
+        <h1 class="h3 mb-2 text-gray-800">Task Management - <?php echo isset($task) ? 'Edit' : 'Add'; ?></h1>
     </div>
     <?php echo $this->session->flashdata('message'); ?>
     <form id="taskSave" action="<?php echo base_url('admin/task/save'); ?>" method="POST" enctype="multipart/form-data">
@@ -38,7 +38,7 @@
                                 <label>Select Product:</label>
                                 <select class="form-control" name="product_id" id="product_id" required="required">
                                     <?php if(isset($products)): foreach($products AS $row): ?>
-                                    <option value="<?php echo $row['id']; ?>" <?php if(set_value('product_id')){ if(set_value('product_id') == $row['id']){ echo 'selected'; } } ?> <?php if(isset($staff)){ if($staff['product_id'] == $row['id']){ echo 'selected'; } } ?>><?php echo $row['name']; ?></option>
+                                    <option value="<?php echo $row['id']; ?>" <?php if(set_value('product_id')){ if(set_value('product_id') == $row['id']){ echo 'selected'; } } ?> <?php if(isset($task)){ if($task['product_id'] == $row['id']){ echo 'selected'; } } ?>><?php echo $row['name']; ?></option>
                                     <?php endforeach; endif; ?>
                                 </select>
                                 <?php echo form_error('product_id'); ?>
@@ -68,7 +68,7 @@
                                 <label>Select Staff member:</label>
                                 <select class="form-control" name="assigned_to" id="staff_id" required="required">
                                     <?php if(isset($staffs)): foreach($staffs AS $row): ?>
-                                    <option value="<?php echo $row['id']; ?>" <?php if(set_value('assigned_to')){ if(set_value('assigned_to') == $row['id']){ echo 'selected'; } } ?> <?php if(isset($staff)){ if($staff['assigned_to'] == $row['id']){ echo 'selected'; } } ?>><?php echo $row['name']; ?></option>
+                                    <option value="<?php echo $row['id']; ?>" <?php if(set_value('assigned_to')){ if(set_value('assigned_to') == $row['id']){ echo 'selected'; } } ?> <?php if(isset($task)){ if($task['assigned_to'] == $row['id']){ echo 'selected'; } } ?>><?php echo $row['name']; ?></option>
                                     <?php endforeach; endif; ?>
                                 </select>
                                 <?php echo form_error('assigned_to'); ?>

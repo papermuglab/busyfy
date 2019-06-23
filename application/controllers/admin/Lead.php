@@ -63,13 +63,13 @@ class Lead extends MY_Controller {
             $lead['patron_mobile'] = $this->input->post('mobile');
             if (!empty($leadID)) { // Update
                 $this->dml->update(TBL_LEADS, 'lead_id', $leadID, $lead);
-                $message = getDesignedMessage('Task updated successfully.');
+                $message = getDesignedMessage('Lead updated successfully.');
             } else { // Insert
                 $lead['vendor_id'] = $this->input->post('vendor_id');
                 $lead['product_id'] = $this->input->post('product_id');
                 $this->dml->insert(TBL_LEADS, $lead);
 
-                $message = getDesignedMessage('Task assigned successfully.');
+                $message = getDesignedMessage('Lead assigned successfully.');
             }
             $this->session->set_flashdata('message', $message);
             redirect(base_url('admin/lead/'));

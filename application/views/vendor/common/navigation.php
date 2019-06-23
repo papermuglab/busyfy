@@ -75,8 +75,8 @@
                 <div id="collapseThree" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Lead management:</h6>
-                        <a class="collapse-item" href="<?php echo base_url('vendor/product'); ?>">List</a>
-                        <a class="collapse-item" href="<?php echo base_url('vendor/product/add'); ?>">Add</a>
+                        <a class="collapse-item" href="<?php echo base_url('vendor/lead'); ?>">List</a>
+                        <a class="collapse-item" href="<?php echo base_url('vendor/lead/add'); ?>">Add</a>
                     </div>
                 </div>
             </li>

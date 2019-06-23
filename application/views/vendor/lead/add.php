@@ -6,7 +6,7 @@
         <h1 class="h3 mb-2 text-gray-800">Lead Management - <?php echo isset($lead) ? 'Edit' : 'Add'; ?></h1>
     </div>
     <?php echo $this->session->flashdata('message'); ?>
-    <form id="leadSave" action="<?php echo base_url('admin/lead/save'); ?>" method="POST" enctype="multipart/form-data">
+    <form id="leadSave" action="<?php echo base_url('vendor/lead/save'); ?>" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="lead_id" id="lead_id" value="<?php if(isset($lead)){ echo $lead['lead_id']; }else{ echo 0; } ?>">
         <div class="row">
             <div class="col-md-6">
@@ -18,20 +18,7 @@
                     <!-- Card Content - Collapse -->
                     <div class="collapse show" id="leadDetails">
                         <div class="card-body">
-                            <?php if(!isset($lead)): ?>
-                            <div class="form-group">
-                                <label>Select Vendor:</label>
-                                <select class="form-control" name="vendor_id" id="task_vendor_id" required="required">
-                                    <option value="">Select Vendor</option>
-                                    <?php foreach($vendorList AS $vendor): ?>
-                                    <option value="<?php echo $vendor['key']; ?>" <?php if(set_value('vendor_id')){ if(set_value('vendor_id') == $vendor['key']){ echo 'selected'; } } ?>><?php echo $vendor['value']; ?></option>
-                                    <?php endforeach; ?>
-                                </select>
-                                <?php echo form_error('vendor_id'); ?>
-                            </div>
-                            <?php else: ?>
-                            <input type="hidden" name="vendor_id" id="vendor_id" value="<?php if(isset($lead)){ echo $lead['vendor_id']; } ?>">
-                            <?php endif; ?>
+                            <input type="hidden" name="vendor_id" id="vendor_id" value="<?php echo $this->session->userdata('vendor_id'); ?>">
                             <?php if(!isset($lead)): ?>
                             <div class="form-group">
                                 <label>Select Product:</label>
