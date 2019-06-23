@@ -45,6 +45,7 @@
 </script>
 <!-- Bootstrap core JavaScript-->
 <script src="<?php echo base_url('assets/admin/'); ?>vendor/jquery/jquery.min.js"></script>
+<script src="<?php echo base_url('assets/admin/'); ?>js/jquery.datetimepicker.full.min.js"></script>
 <script src="<?php echo base_url(); ?>/assets/admin/js/jquery.validate.js"></script>
 <script src="<?php echo base_url('assets/admin/'); ?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
@@ -56,6 +57,10 @@
 <script src="<?php echo base_url('assets/admin/'); ?>js/common.js"></script>
 <script src="<?php echo base_url('assets/admin/'); ?>js/validation-forms.js"></script>
 <script>
+    jQuery.datetimepicker.setLocale('en');
+    jQuery('#datetimepicker').datetimepicker({
+	format:'Y-m-d H:i'
+    });
     $('#filter_button').on('click', function () {
         var keyWord = $('#key_word').val() != '' ? encodeURI($('#key_word').val()) : 0;
         var status = encodeURI($('#status').val());
@@ -73,6 +78,36 @@
         $('#uploadedDocument').attr('src', documentURL);
         $('#viewDoc').modal('show');
     }
+    $('#task_vendor_id').on('change', function(){
+        var vendorID = $(this).val();
+        $.get(base_url + '/task/getData', {vendorID: vendorID}, function(data){
+            var result = JSON.parse(data);
+            $('#single_cost').val('');
+            $('#total_cost').val('');
+            $('#product_id').empty().append('<option value="">Select Product</option>');
+            $('#staff_id').empty().append('<option value="">Select Staff member</option>');
+            $.each(result['products'], function(index, value){
+                $('#product_id').append('<option value="'+value['id']+'">'+value['name']+'</option>');
+            });
+            $.each(result['staff'], function(index, value){
+                $('#staff_id').append('<option value="'+value['id']+'">'+value['name']+'</option>');
+            });
+        });
+    });
+    $('#product_id').on('change', function(){
+        var productID = $(this).val();
+        $.get(base_url + '/product/getProductPrice', {productID: productID}, function(data){
+            $('#single_cost').val(data);
+        });
+    });
+    $('#quantity').on('keyup', function(){
+        var cost = parseFloat($('#single_cost').val());
+        var quantity = parseInt($(this).val());
+        var total = cost * quantity;
+        if (!isNaN(total)) {
+            $('#total_cost').val(cost * quantity);
+        }
+    });
 </script>
 </body>
 

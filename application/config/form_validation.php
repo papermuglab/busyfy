@@ -604,6 +604,68 @@ $config = array(
             'rules' => 'required'
         )
     ),
+    'vendor_add_task' => array(
+        array(
+            'field' => 'vendor_id',
+            'label' => 'Vendor',
+            'rules' => 'required|trim'
+        ),
+        array(
+            'field' => 'product_id',
+            'label' => 'Product',
+            'rules' => 'required|trim'
+        ),
+        array(
+            'field' => 'single_cost',
+            'label' => 'Single cost',
+            'rules' => 'required|trim'
+        ),
+        array(
+            'field' => 'quantity',
+            'label' => 'Quantity',
+            'rules' => 'required|trim|integer'
+        ),
+        array(
+            'field' => 'total_cost',
+            'label' => 'Total cost',
+            'rules' => 'required|trim'
+        ),
+        array(
+            'field' => 'assigned_to',
+            'label' => 'Staff',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'pickup_location',
+            'label' => 'Pickup location',
+            'rules' => 'required|trim'
+        ),
+        array(
+            'field' => 'pickup_datetime',
+            'label' => 'Pickup datetime',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'drop_location',
+            'label' => 'Drop location',
+            'rules' => 'required'
+        ),
+        array(
+            'field' => 'name',
+            'label' => 'Name',
+            'rules' => 'required|trim|alpha_numeric_spaces'
+        ),
+        array(
+            'field' => 'email',
+            'label' => 'Email',
+            'rules' => 'required|trim|valid_email'
+        ),
+        array(
+            'field' => 'mobile',
+            'label' => 'Mobile',
+            'rules' => 'required|trim|integer|exact_length[10]'
+        )
+    ),
     'error_prefix' => '<span style="color:red">',
     'error_suffix' => '</span>'
 );

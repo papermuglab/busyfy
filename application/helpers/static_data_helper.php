@@ -76,3 +76,25 @@ function getNormalStatusName($id) {
     }
     return $name;
 }
+
+function getTaskStatus() {
+    return array(0 => 'In process', 1 => 'Completed', 2 => 'Cancelled');
+}
+
+function getTaskStatusName($type) {
+    $name = '';
+    switch ($type) {
+        case 0:
+            $name = 'In process';
+            break;
+        case 1:
+            $name = 'Completed';
+            break;
+        case 2:
+            $name = 'Cancelled';
+            break;
+        default:
+            break;
+    }
+    return $name;
+}
